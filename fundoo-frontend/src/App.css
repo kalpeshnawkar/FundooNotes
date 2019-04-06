@@ -1,0 +1,95 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.cardLogin{
+  width:30%;
+  justify-content: center;
+  margin-left: 34%;
+  margin-top: 7%;
+}
+.login{
+  width: 250px; 
+  border: 10px;
+  padding: 35px;
+  background-blend-mode: lighten;
+  text-align:center;
+  
+
+}
+.nextLogin{
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  }
+.cardRegister{
+  width:45%;
+  justify-content: center;
+  margin-left: 27%;
+  margin-top: 7%;
+}
+.register{
+  width: 473px; 
+  border: 10px;
+  padding: 35px;
+  background-blend-mode: lighten;
+  text-align:center;
+  
+
+}
+.nameRegister{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+.emailRegister{
+  width: 50%;
+  display: flex;
+}
+.nextRegister{
+  display: flex;
+  flex-direction: row;
+  margin-right: 47px;
+  justify-content: space-around;
+  margin-left: -26%;
+  cursor: pointer;
+}
+.buttonNext{
+    width: 19%;
+    height: 40px;
+    background-color: blue;
+    color: white;
+    margin-right: -175px;
+ 
+
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
