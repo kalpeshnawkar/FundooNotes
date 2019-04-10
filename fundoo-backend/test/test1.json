@@ -1,0 +1,21 @@
+{
+    
+    "register":{
+        "firstName":"shubham",
+        "lastName":"shrama",
+        "email":"shubham@gmail.com",
+        "password":"shubham@123"
+
+    },
+    "login":{
+        "email":"shubham@gmail.com",
+        "password":"shubham@123"
+    },
+    "forgot":{
+        "email":"shubham@gmail.com"
+    },
+    "reset":{
+        "Headers":"res.res_result.token",
+        "password":"shubham@123"
+    }
+}

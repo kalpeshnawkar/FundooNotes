@@ -56,6 +56,7 @@ exports.login=(request,response)=>{
     res_result={};
       //if there  a wrong validation thenan error
     if(errors){
+        
         res_result.status=false;
         res_result.message=errors;
         response.status(404).send(res_result);
@@ -113,7 +114,7 @@ exports.forgot=(request,response)=>{
                 "email":request.body.email
             }
             var obj=tokenGenrate(payload);
-            var url=`http://localhost:3000/reset /\n${obj.token}`;
+            var url=`http://localhost:3000/resetpassword /\n${obj.token}`;
             console.log("url==",url)
             sendMailer(url)
             res_result.status=true
@@ -136,6 +137,7 @@ exports.forgot=(request,response)=>{
 
 exports.reset=(request,response)=>{
     try{
+        console.log("request in controller==",request )
     res_result={};
     if(request.body==null){
         res_result.status=false;

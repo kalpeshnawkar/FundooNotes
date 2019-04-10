@@ -1,23 +1,24 @@
 import React, {Component} from 'react'
-import card from '@material-ui/core'
+import Card from '@material-ui/core/Card'
 import ForgotPasswordInput from '../components/ForgotPasswordInput'
 class ForgotPassword extends Component{
     render(){
     return(
-        <card>
+        <Card className='forgotCard'>
         <div>
             <font color="Red">
-        <h1>FUNDOO</h1>
+        <h1>Fundoo</h1>
         </font>
-        <font size="1">
-        <h1>Create account with Fundoo</h1>
+        <h1 className="forgoth1"><b>Find Your Password</b></h1>
+        <font size="">
+        <div className="forgoth2">Enter Your Email</div>
         </font>
-        <dib>
+        <div>
             < ForgotPasswordInput />
-        </dib>
+        </div>
 
         </div>
-        </card>
+        </Card>
     )
     }
 }

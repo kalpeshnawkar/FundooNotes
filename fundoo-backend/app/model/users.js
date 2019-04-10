@@ -45,8 +45,8 @@ user_model.prototype.register=(request,callback) =>{
             }
             else{
                 var user_data=new user({
-                    "firstName":request.firstname,
-                    "lastName":request.lastname,
+                    "firstName":request.firstName,
+                    "lastName":request.lastName,
                     "email":request.email,
                     "password":hash(request.password)
                 })
@@ -74,8 +74,9 @@ user_model.prototype.register=(request,callback) =>{
         if(err){
              callback(err)
         }
-         else if(result !==null)
+         else if(result !=null)
         {
+          
              bcrypt.compare(request.password,result.password).then(function(response){
                  console.log("response in user==",response)
                  console.log("after bcrypt==",request.password)
