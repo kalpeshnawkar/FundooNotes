@@ -77,3 +77,12 @@ function verifyService(data,token){
 
 export { userLogin,userRegister,userForgot,userReset,verifyService}
 export default withRouter(userLogin,userRegister,userForgot,userReset);
+
+
+
+/**
+ * sfhnoesaf
+ * efsekfjse
+ * fsefhsef
+ * esfsefesfes[fhse
+ * fsefesf] */
