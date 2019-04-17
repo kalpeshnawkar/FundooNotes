@@ -6,6 +6,7 @@ import register from "./pages/register"
 import ForgotPassword from "./pages/ForgotPassword"
 import ResetPassword from "./pages/RestPassword"
 import DashBoard from './components/DashBoard';
+import VerifyEmail from './pages/VerifyEmail'
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
       <Route path="/forgotpassword" component={ForgotPassword}></Route>
       <Route path="/resetpassword" component={ResetPassword}></Route>
       <Route path="/dashboard" component={DashBoard}></Route>
+      <Route path="/verifyemail/:token" component={VerifyEmail}></Route>
       </div>
       </Router>
       </div>

@@ -71,7 +71,7 @@ class RegisterInput extends Component {
                         position: toast.POSITION.BOTTOM_CENTER
                     })
             }
-            else if (!/[a-z0-9._%+-]+@gmail.com/.test(this.state.email)) {
+            else if (!/([A-Za-z0-9])+@([A-Za-z0-9])+.([A-Za-z]{2,4})$/.test(this.state.email)) {
                 toast("Email Invalid",
                     {
                         position: toast.POSITION.BOTTOM_CENTER

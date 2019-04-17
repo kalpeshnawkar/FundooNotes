@@ -8,9 +8,9 @@ module.exports = {
             message: 'token Generated',
             token: token
         }
-        console.log("der",obj);
+        console.log(obj);
         
-        return obj;
+        return obj.token;
     }
 
 catch(e){

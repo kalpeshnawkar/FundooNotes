@@ -152,6 +152,39 @@ margin-top: 11%;
   color: gray!important;
 }
 
+.MuiDrawer-paper-90 {
+  top: 14%!important;
+}
+.PersistentDrawerLeft-drawer-59 {
+  width: 0px!important;
+  flex-shrink: 0!important;
+}
+.MuiToolbar-regular-45 {
+  min-height: 42px!important;
+}
+.MuiIconButton-root-47 {
+  font-size:.6875rem!important;
+}
+
+.labelsDrawer{
+  color: #5f6368;
+    cursor: default;
+    letter-spacing: .07272727em;
+    font-family: Roboto,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1rem;
+    text-transform: uppercase;
+    padding: 15px 24px 10px;
+    margin-left: -80%;
+}
+.MuiAppBar-colorPrimary-14 {
+ background-color:white!important;
+}
+.MuiIconButton-colorInherit-48 {
+  color: gray!important;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

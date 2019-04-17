@@ -1,7 +1,7 @@
 import React,{Component}from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import{ AppBar,Typography} from '@material-ui/core/';
+import{ AppBar} from '@material-ui/core/';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,9 +10,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase'
+ import DrawerMenu from './DrawerMenu'
 //import { fade } from '@material-ui/core/styles/colorManipulator';
 
-
+const drawerWidth = 240;
 
 const styles =theme=>( {
   root: {
@@ -26,43 +27,44 @@ const styles =theme=>( {
     marginLeft: -12,
     marginRight: 20,
   },
-  // search: {
-  //   position: 'relative',
-  //   borderRadius: theme.shape.borderRadius,
-  //   backgroundColor: fade(theme.palette.common.white, 0.15),
-  //   '&:hover': {
-  //     backgroundColor: fade(theme.palette.common.white, 0.25),
-  //   },
-  //   marginRight: theme.spacing.unit * 2,
-  //   marginLeft: 0,
-  //   width: '100%',
-  //   [theme.breakpoints.up('sm')]: {
-  //     marginLeft: theme.spacing.unit * 3,
-  //     width: 'auto',
-  //   },
-  // },
-  // searchIcon: {
-  //   width: theme.spacing.unit * 9,
-  //   height: '100%',
-  //   position: 'absolute',
-  //   pointerEvents: 'none',
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center'
-  // }
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
+   
 });
 
 
 class DashBoard extends Component {
-  state = {
+  constructor(props){
+  super(props);
+  this.state = {
     anchorEl: null,
+    open:false
     
   };
+}
+
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
   handleMenuClose=()=>{
     this.setState({anchorEl:null})
+  }
+  handleToggle=()=>{
+    this.setState({
+        open:!this.state.open
+    })
   }
 
  render()  {
@@ -85,12 +87,11 @@ class DashBoard extends Component {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu"  >
+          <MenuIcon onClick={this.handleToggle}></MenuIcon>
+         
+          
           </IconButton>
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              KEEP
-            </Typography>
             <div >
               
               <IconButton>
@@ -114,8 +115,12 @@ class DashBoard extends Component {
                 <AccountCircle />
               </IconButton>
         </Toolbar>
+        <DrawerMenu
+            appbarprops={this.state.open}
+        />
       </AppBar>
       {renderMenu}
+      
     </div>
   );
 }

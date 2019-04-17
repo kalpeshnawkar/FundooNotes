@@ -42,7 +42,7 @@ class LoginInput extends Component {
                 position: toast.POSITION.TOP_CENTER
             });
         }
-        else if (!/[a-z0-9._%+-]+@gmail.com/.test(this.state.email)) {
+        else if (!/([A-Za-z0-9])+@([A-Za-z0-9])+.([A-Za-z]{2,4})$/.test(this.state.email)) {
             toast("Email Invalid",
                 {
                     position: toast.POSITION.TOP_CENTER
@@ -64,7 +64,9 @@ class LoginInput extends Component {
                 'email': this.state.email,
                 'password': this.state.password
             }
-            userLogin(data);
+            userLogin(data)
+                
+            
         }
 
     }
@@ -97,7 +99,7 @@ class LoginInput extends Component {
                         variant="outlined"
                     />
                 </div>
-                <u className="loginForgot" onClick={this.onClickForgotPassword}><b>ForGot Password?</b></u><br></br>
+                <u className="loginForgot" onClick={this.onClickForgotPassword}><b>Forgot Password?</b></u><br></br>
 
                 <div className="nextLogin">
                     <u className="loginCreate" onClick={this.onClickCreateAccount}><b>create Account</b></u>

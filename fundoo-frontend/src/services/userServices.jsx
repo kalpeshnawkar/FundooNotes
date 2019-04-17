@@ -2,8 +2,8 @@ import axios from 'axios'
 import {toast} from 'react-toastify'
 import {withRouter} from 'react-router-dom'
 function userLogin(data){
-        axios.post('/login',data)
-        .then(function (response) {
+         axios.post('/login',data)
+         .then(function (response) {
             localStorage.setItem("token",response.data.token)
              console.log(response)
             toast("Login Successful")
@@ -13,16 +13,17 @@ function userLogin(data){
             console.log(err)
             toast("login unsucesssful")
         })
+     
 }
 function userRegister(data){
     axios.post('/register', data)
     .then(function(response){
         console.log(response)
-        toast("register successful")
+        toast("plz,check your email fro email verification")
     })
     .catch(function(err){
         console.log(err)
-        toast("not registered")
+        toast("some thing wrong")
     })
 }
 function userForgot(data){
@@ -30,34 +31,49 @@ function userForgot(data){
     axios.post('/forgotpassword',data)
   
     .then(function(response) {
-        var token1=response.data.token;
-        console.log("token1==",token1);
-        var token2=token1.substring(34);
-        console.log("token2==",token2)
-        localStorage.setItem("verifyToken",token2)
 
-        toast("Check Your Email");
+        toast("plz,Check Your Email to reset your password");
     })
     .catch(function(err) {
-        console.log(err)
-        toast(err)
+        toast("Some thing Wrong")
     })
 }
 function userReset(data,token){
-axios.post(`/reset${token}`,data,{
-    Headers:{
+
+axios.post(`/reset/${token}`,data,{
+    headers:{
         'token':token
     }
 })
 .then(function(response){
     console.log(response)
     toast('Your password is reseted')
+    window.location.href='/login'
 })
 .catch(function(err){
     console.log(err)
-    toast("your password is not reset")
+    toast("your password is not reseted")
 })
 }
+function verifyService(data,token){
+    console.log("tokfgf",token);
+    
+    axios.post(`/verifyemail/${token}`,data,{
+        headers:{
+            'token':token
+        }
+    
+    })
+    .then(function(response){
+        console.log(response)
+       alert('Email verified')
 
-export { userLogin,userRegister,userForgot,userReset}
-export default withRouter(userLogin);
+    })
+    .catch(function(err){
+        console.log(err)
+        toast('email not verified')
+    })
+}
+
+export { userLogin,userRegister,userForgot,userReset,verifyService}
+export default withRouter(userLogin,userRegister,userForgot,userReset);

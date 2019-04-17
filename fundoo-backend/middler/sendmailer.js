@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer');
-function sendMailer(url){
+function sendMailer(url,email){
 var transporter=nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -10,7 +10,7 @@ var transporter=nodemailer.createTransport({
   
   var mailOptions = {
     from: 'knawkar@gmail.com',
-    to: 'knawkar@gmail.com',
+    to: email,
     subject: 'reset Password link',
     text:url
   };

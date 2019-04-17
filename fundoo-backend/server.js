@@ -10,6 +10,7 @@
 * @since       :`04/04/2019  */
 
 const express = require('express');
+
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const router = require('./routes/routes');
@@ -17,6 +18,8 @@ const dbConfig = require('./config/db.config');
 const mongoose = require('mongoose');
 const app = express();
 require('dotenv').config()
+var redis = require('redis');
+var client = redis.createClient();
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -38,11 +41,15 @@ mongoose.connect(dbConfig.url, {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
 });
+client.on('connect', function() {
+    console.log('redis server connected');
+});
 
 
 app.get('/', (req, res) => {
     res.json({ "message": "Welcome to chat app." });
 });
+ 
 
 // listen for requests
 app.listen(4000, () => {

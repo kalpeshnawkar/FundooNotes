@@ -18,6 +18,11 @@ var userSchema=new mongoose.Schema({
     password:{
         type:String,
         require:true
+    },
+    isVerify:
+    {
+        type:Boolean,
+        default:false
     }
     
 },{
@@ -42,6 +47,7 @@ user_model.prototype.register=(request,callback) =>{
             if(result !== null)
             {
                 console.log("User already exist !")
+                callback("User already exist")
             }
             else{
                 var user_data=new user({
@@ -76,13 +82,13 @@ user_model.prototype.register=(request,callback) =>{
         }
          else if(result !=null)
         {
-          
+             console.log(result);
+             
              bcrypt.compare(request.password,result.password).then(function(response){
                  console.log("response in user==",response)
-                 console.log("after bcrypt==",request.password)
                 if(response){
                      console.log("login Succesful")
-                    return callback(null, response)               
+                    return callback(null, result)               
                      }
                  else{
                      console.log("Incorrect password")
@@ -105,19 +111,24 @@ user_model.prototype.forgot =((data,callback) => {
         if(err){
             callback(err);
         }
-        else
+        else if(result !=null)
         {
              callback(null,result);
+        }
+        else{
+            console.log("email not Found")
+           return callback("email not found")
         }
     })
 })
 
-user_model.prototype.reset=((request,callback)=>
+user_model.prototype.reset=((req,callback)=>
 
  {
-     console.log("request in user==",request)
-    var newPassword=bcrypt.hashSync(request.password,saltRounds)
-     user.updateOne({password:newPassword},(err,response)=>{
+     console.log("req.dedcode in usermodel==",req.decode )
+     console.log("request in user==",req)
+    var newPassword=bcrypt.hashSync(req.password,saltRounds)
+     user.updateOne({_id:req.decode.payload.user_id},{password:newPassword},(err,response)=>{
          if(err){
              callback(err)
          }
@@ -127,4 +138,16 @@ user_model.prototype.reset=((request,callback)=>
      }
     )
  })
+ user_model.prototype.verification=(req,callback)=>{
+    console.log("req in model==",req)
+    user.updateOne({'isVerify':true},(err,response)=>{
+        if(err){
+            callback(err)
+        }
+        else{
+
+           return callback(null,response)
+        }
+    })
+}
  module.exports=new user_model

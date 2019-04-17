@@ -7,7 +7,6 @@ exports.register = (data,callback) => {
     console.log('req body in services ==',data);
     
     user.register(data,(err,result) => {
-        console.log("response body in services==",result)
         //if therer is error then it will be send erroe callback
         if(err){
             callback(err);
@@ -50,17 +49,19 @@ exports.forgot=(data,callback)=>{
     
     
     user.forgot(data,(err,result)=>{
-        console.log(data);
+    
         
         if(err){
             
             callback(err);
         }
-        else
+        else 
         {
         
              callback(null,result);
         }
+        
+    
     })
 }
 catch(e){
@@ -74,7 +75,6 @@ exports.reset=(data,callback)=>{
     
     
     user.reset(data,(err,result)=>{
-        console.log(result);
         
         if(err){
             
@@ -90,4 +90,17 @@ exports.reset=(data,callback)=>{
 catch(e){
     console.log(e)
 }
+}
+exports.emailService = (data,callback) => {
+    user.verification(data,(err, result)=>{
+        if (err) {
+            callback(err)
+
+        }
+        else{
+            console.log("res in service=",result)
+            callback(null,result)
+        }
+    })
+
 }

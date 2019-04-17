@@ -1,6 +1,9 @@
 const user_services=require("../services/UserServices");
 const {tokenGenrate}=require('../middler/genrate.token')
 const {sendMailer}=require('../middler/sendmailer')
+var redis = require('redis');
+var client = redis.createClient();
+
 
 
 exports.register = (req,res) => {
@@ -35,6 +38,14 @@ exports.register = (req,res) => {
         {
             res_result.status = true;
             res_result.data = result;
+            const payLoad={
+                 'user_id':res_result.data._id
+            }
+            var obj=tokenGenrate(payLoad)
+            var url=`http://localhost:3000/verifyemail/${obj.token}`
+            sendMailer(url,req.body.email);
+           
+            res_result.token=obj.token;
             res.status(200).send(res_result);
         }
     })
@@ -71,15 +82,34 @@ exports.login=(request,response)=>{
 
         }
         else{
-            const payload={
-                "email":request.body.email
-            }
-           var token= tokenGenrate(payload)
-
             res_result.status=true;
             res_result.data=result;
+            const payload={
+                "user_id":res_result.data._id
+            }
+            console.log(payload);
+            
+           var token= tokenGenrate(payload)
+           var userid=res_result.data._id;
+           console.log("user ",userid);
+           
+           client.set('token',token)
+           client.get("token",function(err,result){
+               if(err) {
+                   console.log(err)
+               }
+               else {
+               console.log('redis is connedcted',result)
+               }
+
+           })
+        
             res_result.token=token;
-            response.status(200).send(res_result);
+            response.status(200).send({
+                "status":res_result.status,
+                "UserId":res_result.data._id,
+                "message":"login successful",
+            "token":token});
         }
 
     })
@@ -107,19 +137,20 @@ exports.forgot=(request,response)=>{
         if(err){
             res_result.status=false;
             res_result.message=err;
-            response.status(400).send(res-result);
+            response.status(400).send(res_result);
         }
-        else{
-            const payload={
-                "email":request.body.email
-            }
-            var obj=tokenGenrate(payload);
-            var url=`http://localhost:3000/resetpassword /\n${obj.token}`;
-            console.log("url==",url)
-            sendMailer(url)
+        else {
             res_result.status=true
             res_result.data=result
+            const payload={
+               user_id:res_result.data._id
+            }
+            var obj=tokenGenrate(payload);
+            var url=`http://localhost:3000/resetpassword/${obj.token}`;
+           sendMailer(url,request.body.email)
+          
             res_result.token=obj.token
+            res_result.url=url
             response.status(200).send(res_result)
 
         }
@@ -165,4 +196,26 @@ exports.reset=(request,response)=>{
 catch(e){
     console.log(e)
 }
+}
+exports.Emailverify=(req,res)=>{
+    var res_result={};
+    var userdata={
+        email:req.decoded.email
+    }
+    user_services.emailService(userdata,(err,result)=>{
+        console.log('result in controller==',result)
+        if(err){
+            res_result.status=false;
+            res_result.message=err;
+            res.status(400).send(res_result);
+
+        }
+        else{
+            res_result.status=true;
+            res_result.data=result;
+            res.status(200).send(res_result);
+        }
+
+    })
+    
 }

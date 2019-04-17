@@ -51,9 +51,9 @@ class ResetPasswordInput extends Component {
                 'password': this.state.password
             }
             event.preventDefault();
-            let url = window.location.pathname
-            let verifyurl = url.substring(15);
-            userReset(data, verifyurl)
+            var url=window.location.pathname;
+            var verifyurl=url.substr(15)
+            userReset(data,verifyurl)
         }
         // }
         // catch(e){

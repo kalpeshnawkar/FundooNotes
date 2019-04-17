@@ -22,7 +22,7 @@ class ForgotPasswordInput extends Component
         if(!this.state.email){
             toast("email cannot be empty",{position:toast.POSITION.TOP_CENTER})
         }
-       else if(!/[a-z0-9._%+-]+@gmail.com/.test(this.state.email)){
+       else if(!/([A-Za-z0-9])+@([A-Za-z0-9])+.([A-Za-z]{2,4})$/.test(this.state.email)){
             toast('Email Invalid',{position:toast.POSITION.TOP_CENTER})
         }
         else{
