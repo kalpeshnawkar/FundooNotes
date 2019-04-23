@@ -37,7 +37,7 @@ class ForgotPasswordInput extends Component
     render(){
         return(
             <div>
-                <div>
+                <div className="emailForgot">
                 <TextField 
                 required
                 label="Email"

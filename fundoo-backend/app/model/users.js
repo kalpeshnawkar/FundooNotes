@@ -23,6 +23,9 @@ var userSchema=new mongoose.Schema({
     {
         type:Boolean,
         default:false
+    },
+    setProfile:{
+        type:String
     }
     
 },{
@@ -121,26 +124,24 @@ user_model.prototype.forgot =((data,callback) => {
         }
     })
 })
-
-user_model.prototype.reset=((req,callback)=>
-
- {
-     console.log("req.dedcode in usermodel==",req.decode )
-     console.log("request in user==",req)
-    var newPassword=bcrypt.hashSync(req.password,saltRounds)
-     user.updateOne({_id:req.decode.payload.user_id},{password:newPassword},(err,response)=>{
-         if(err){
-             callback(err)
-         }
-         else{
-            callback(null,response)
+user_model.prototype.reset = (req, callback) => {
+    console.log("payload in usermodel==",req)
+    const newPassword = bcrypt.hashSync(req.password, saltRounds);
+    console.log(('newPassword =====>', newPassword));
+    user.updateOne({ _id: req.id.payload.user_id }, { password: newPassword }, (err, result) => {
+        if (err) {
+            return callback(err);
         }
-     }
-    )
- })
+        else {
+            return callback(null, result);
+        }
+    })
+}
+
+
  user_model.prototype.verification=(req,callback)=>{
     console.log("req in model==",req)
-    user.updateOne({'isVerify':true},(err,response)=>{
+    user.updateOne({_id:req.id.payload.user_id},{'isVerify':true},(err,response)=>{
         if(err){
             callback(err)
         }
@@ -149,5 +150,36 @@ user_model.prototype.reset=((req,callback)=>
            return callback(null,response)
         }
     })
+}
+
+
+user_model.prototype.setProfile=(userID,image, callback)=> {
+    var newuser= null    
+    if(image!= null){
+       newuser =image;
+        console.log("newuser",newuser);
+        
+    }else{
+        callback("image not found")
+    }
+    console.log("image found",userID);
+    
+    user.findOneAndUpdate(
+        {
+            _id: userID
+        },
+        {
+            $set:{
+                setProfile :newuser
+            }
+        },
+        (err,result)=>{
+            if(err){
+                callback(err)
+            }else{
+                console.log("updated user successfully...",newuser)
+                return callback(null,newuser)
+            }
+});
 }
  module.exports=new user_model

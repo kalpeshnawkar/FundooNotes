@@ -1,3 +1,4 @@
+
 import React,{Component}from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -5,12 +6,13 @@ import{ AppBar} from '@material-ui/core/';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase'
  import DrawerMenu from './DrawerMenu'
+ import AccountProfile from './accountProfile'
 //import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const drawerWidth = 240;
@@ -18,6 +20,7 @@ const drawerWidth = 240;
 const styles =theme=>( {
   root: {
     flexGrow: 3,
+    marginBottom: 85
   },
 
   grow: {
@@ -45,22 +48,16 @@ const styles =theme=>( {
 });
 
 
-class DashBoard extends Component {
+class Appbar extends Component {
   constructor(props){
   super(props);
   this.state = {
-    anchorEl: null,
     open:false
     
   };
 }
 
-  handleProfileMenuOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-  handleMenuClose=()=>{
-    this.setState({anchorEl:null})
-  }
+  
   handleToggle=()=>{
     this.setState({
         open:!this.state.open
@@ -69,20 +66,8 @@ class DashBoard extends Component {
 
  render()  {
   const { classes } = this.props;
-  const { anchorEl} = this.state;
-  const isMenuOpen = Boolean(anchorEl);
-  const renderMenu = (
-    <Menu
-       anchorEl={anchorEl}
-       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-     open={isMenuOpen}
-      onClose={this.handleMenuClose}
-     >
-      <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+  
+   
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -107,27 +92,29 @@ class DashBoard extends Component {
                 }}
               />
             </div>
-
+                <div className="accountProfile"
+                >
           <IconButton className
                 onClick={this.handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
+                <AccountProfile />
               </IconButton>
+              </div>
         </Toolbar>
         <DrawerMenu
             appbarprops={this.state.open}
         />
       </AppBar>
-      {renderMenu}
+      
       
     </div>
   );
 }
 }
 
-DashBoard.propTypes = {
+Appbar.propTypes = {
  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashBoard);
+export default withStyles(styles)(Appbar);

@@ -28,7 +28,6 @@
   box-shadow: 0px 1px 3px 6px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)!important
 }
 .login{
-  width: 250px; 
   border: 10px;
   padding: 35px;
   background-blend-mode: lighten;
@@ -42,9 +41,6 @@
   }
   .loginTextField1{
     width: 119%
-  }
-  .loginForgot{
-    margin-left: 21%
   }
   .loginCreate{
     margin-top: 7%
@@ -78,8 +74,9 @@ flex-direction: row;
 justify-content: space-between;
 }
 .emailRegister{
-  width: 50%;
-  display: flex;
+  width: 108%;
+  display: flex
+
 }
 .nextRegister{
   display: flex;
@@ -103,7 +100,7 @@ justify-content: space-between;
   height: 40px;
   background-color: blue;
   color: white;
-  margin-right: -44px;
+  margin-right: 9px;
 }
 .forgotCard{
 width: 32%;
@@ -121,9 +118,13 @@ margin-top: 11%;
     height: 40px;
     background-color: blue;
     color: white;
-    margin-right: -175px;
+    margin-right: -259px;
     margin-bottom: 13px;
     margin-top: 42px;
+}
+.emailForgot{
+   width: 92%;
+    margin-left: 4%;
 }
 .resetCard{
   width: 30%;
@@ -134,6 +135,11 @@ margin-top: 11%;
 .reseth1{
   font-size: 16px
 }
+.resetText{
+  WIDTH: 80%;
+    MARGIN-LEFT: 10%;
+}
+
  .loginTextField1{
     width: 119%
   }
@@ -141,19 +147,21 @@ margin-top: 11%;
 .App-link {
   color: #61dafb;
 }
-.MuiAppBar-colorPrimary-11{
-  color: fff!important;
+ 
+ 
+.MuiAppBar-colorPrimary-8{
+  color: gray!important;
   background-color: white !important;
 }
 .MuiIconButton-colorInherit-45 {
    color:#7b7b7b!important;
 }
-.MuiTypography-colorInherit-91 {
+/* .MuiTypography-colorInherit-91 {
   color: gray!important;
-}
+} */
 
-.MuiDrawer-paper-90 {
-  top: 14%!important;
+.MuiDrawer-paper-93 {
+  top: 105px!important;
 }
 .PersistentDrawerLeft-drawer-59 {
   width: 0px!important;
@@ -165,25 +173,103 @@ margin-top: 11%;
 .MuiIconButton-root-47 {
   font-size:.6875rem!important;
 }
-
-.labelsDrawer{
-  color: #5f6368;
-    cursor: default;
-    letter-spacing: .07272727em;
-    font-family: Roboto,Arial,sans-serif;
-    font-weight: 500;
-    line-height: 1rem;
-    text-transform: uppercase;
-    padding: 15px 24px 10px;
-    margin-left: -80%;
-}
-.MuiAppBar-colorPrimary-14 {
- background-color:white!important;
+.MuiFormControl-marginNormal-30 {
+  WIDTH: 92%;
 }
 .MuiIconButton-colorInherit-48 {
   color: gray!important;
 }
+.MuiTypography-colorInherit-152 {
+  color: inherit!important;
+}
 
+.labelsDrawer{
+  color: #5f6368;
+cursor: default;
+letter-spacing: .07272727em;
+font-family: Roboto,Arial,sans-serif;
+font-size: .6875rem;
+font-weight: 500;
+line-height: 1rem;
+text-transform: uppercase;
+padding: 15px 24px 10px;
+margin-left: -69%;
+}
+.MuiAppBar-colorPrimary-14 {
+ background-color:white!important;
+}
+.accountProfile{
+  margin-left: 69%;
+}
+.accountPaper{
+   margin-left:  -40%; 
+  margin-right: 30%
+}
+.accountSignOut{
+     margin-left: 59%;
+     margin-top: 5%;
+     width: 31%;
+    padding: 2%;
+}
+.accoutMenuItem{
+margin-left: 100px;
+margin-top: -56px;
+}
+ 
+.noteCreate{
+  /* border: solid 2px;  */
+  text-align: initial;
+  width: 44%;
+    height: 40%;
+    margin-left: 38%;
+}
+.MuiPaper-elevation1-19 {
+  box-shadow: 0px 1px 6px 3px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)!important;
+}
+.MuiInput-root-168 {
+  margin-left: 2%;
+}
+.noteClose{
+box-sizing: border-box;
+color: rgba(0,0,0,0.87);
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+letter-spacing: .01785714em;
+font-family: 'Google Sans',Roboto,Arial,sans-serif;
+font-size: .875rem;
+font-weight: 500;
+line-height: 1.25rem;
+height: 36px;
+padding: 8px 24px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+margin-left:   434px;
+}
+.noteTools{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+.MuiInputBase-input-75 {
+  width:307%!important;
+}
+.colorCard{
+  width: 194%;
+  margin-left: 14%;
+  margin-top: -126%;
+}
+
+.tools{
+display: flex;
+justify-content: space-between;
+}
+
+ 
+
+
+
+ 
 
 @keyframes App-logo-spin {
   from {

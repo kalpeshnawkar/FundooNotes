@@ -39,11 +39,12 @@ exports.register = (req,res) => {
             res_result.status = true;
             res_result.data = result;
             const payLoad={
-                 'user_id':res_result.data._id
+                 user_id:res_result.data._id
             }
+           var msg="Please, verify your email"
             var obj=tokenGenrate(payLoad)
             var url=`http://localhost:3000/verifyemail/${obj.token}`
-            sendMailer(url,req.body.email);
+            sendMailer(url,req.body.email,msg);
            
             res_result.token=obj.token;
             res.status(200).send(res_result);
@@ -74,7 +75,7 @@ exports.login=(request,response)=>{
     }
     else{
     user_services.login(request.body,(err,result)=>{
-        console.log("result in controller==",request.body)
+        console.log("result in controller==",result)
         if(err){
             res_result.status=false;
             res_result.message=err;
@@ -85,7 +86,7 @@ exports.login=(request,response)=>{
             res_result.status=true;
             res_result.data=result;
             const payload={
-                "user_id":res_result.data._id
+                user_id:res_result.data._id
             }
             console.log(payload);
             
@@ -106,6 +107,7 @@ exports.login=(request,response)=>{
         
             res_result.token=token;
             response.status(200).send({
+                "email":res_result.data.email,
                 "status":res_result.status,
                 "UserId":res_result.data._id,
                 "message":"login successful",
@@ -145,9 +147,10 @@ exports.forgot=(request,response)=>{
             const payload={
                user_id:res_result.data._id
             }
+            var msg="Reset Your Password"
             var obj=tokenGenrate(payload);
             var url=`http://localhost:3000/resetpassword/${obj.token}`;
-           sendMailer(url,request.body.email)
+           sendMailer(url,request.body.email,msg)
           
             res_result.token=obj.token
             res_result.url=url
@@ -166,29 +169,34 @@ exports.forgot=(request,response)=>{
 
 
 
-exports.reset=(request,response)=>{
+exports.reset=(req,res)=>{
     try{
-        console.log("request in controller==",request )
+         
     res_result={};
-    if(request.body==null){
+    if(req.body==null){
         res_result.status=false;
         res_result.message="Field is empty";
-        response.status(404).send(res_result);
+        res.status(404).send(res_result);
     }
-    user_services.reset(request.body,(err,result)=>{
+    const reset_data={
+        'id':req.decoded,
+        'password':req.body.password
         
-        console.log("result in controller==",request.body)
+    }
+    user_services.reset(reset_data,(err,result)=>{
+        
+        
         if(err){
             res_result.status=false;
             res_result.message=err;
-            response.staus(400).send(res_result);
+            res.staus(400).send(res_result);
 
         }
         else{
             
             res_result.status=true;
             res_result.data=result;
-            response.status(200).send(res_result);
+            res.status(200).send(res_result);
         }
 
     })
@@ -198,11 +206,12 @@ catch(e){
 }
 }
 exports.Emailverify=(req,res)=>{
+    console.log("req in controller==",req.body)
     var res_result={};
-    var userdata={
-        email:req.decoded.email
+    var email_data={
+        'id':req.decoded
     }
-    user_services.emailService(userdata,(err,result)=>{
+    user_services.emailService(email_data,(err,result)=>{
         console.log('result in controller==',result)
         if(err){
             res_result.status=false;
@@ -219,3 +228,29 @@ exports.Emailverify=(req,res)=>{
     })
     
 }
+
+
+exports.setProfile = (req, res) => {
+    
+        var responseResult = {};
+        let userID = null;
+        if (typeof req.file === 'undefined') {
+            throw new Error("file is mandatory");
+        } else {
+            userID = req.decoded.user_id;
+            let image=(req.file.location)
+            user_services.setProfile(userID, image, (err, result) => {
+                if (err) {
+                    responseResult.success = false;
+                    responseResult.error = err;
+                    res.status(500).send(responseResult)
+                } else {
+                   
+                    responseResult.status = true;
+                    responseResult.data = result;
+                    res.status(200).send(responseResult);
+                }
+            })
+        }
+    } 
+

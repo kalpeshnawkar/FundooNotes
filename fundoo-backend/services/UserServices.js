@@ -104,3 +104,14 @@ exports.emailService = (data,callback) => {
     })
 
 }
+
+
+exports.setProfile  = (paramID,image,callback) => {
+    user.setProfile(paramID,image, (err, result) => {
+        if (err) {
+            callback(err);
+        } else {
+            return callback(null, result)
+        }
+    })
+}

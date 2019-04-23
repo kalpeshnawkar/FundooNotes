@@ -130,7 +130,7 @@ class RegisterInput extends Component {
                 </div>
                 <div className="emailRegister">
                     <TextField
-                                  required
+                        required
                         label="Email"
                         name="email"
                         type="email"

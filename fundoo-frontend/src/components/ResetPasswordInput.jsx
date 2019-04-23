@@ -64,7 +64,7 @@ class ResetPasswordInput extends Component {
     render() {
         return (
             <div>
-                <div>
+                <div className="resetText">
                     <TextField
                         required
                         label="Password"

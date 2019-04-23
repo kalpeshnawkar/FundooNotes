@@ -99,7 +99,7 @@ class LoginInput extends Component {
                         variant="outlined"
                     />
                 </div>
-                <u className="loginForgot" onClick={this.onClickForgotPassword}><b>Forgot Password?</b></u><br></br>
+                <u onClick={this.onClickForgotPassword}><b>Forgot Password?</b></u><br></br>
 
                 <div className="nextLogin">
                     <u className="loginCreate" onClick={this.onClickCreateAccount}><b>create Account</b></u>

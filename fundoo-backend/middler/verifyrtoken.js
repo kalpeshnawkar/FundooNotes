@@ -1,7 +1,6 @@
 var jwt = require('jsonwebtoken');
 exports.checkToken = (req, res, next) => {
     var token1 = req.headers['token'];
-    console.log("token in verify==",token1)
     if (token1) {
         jwt.verify(token1, 'secreatekey', (err, decoded) => {
             if (err) {
@@ -12,7 +11,7 @@ exports.checkToken = (req, res, next) => {
             }
             else {
                 req.decoded = decoded;
-                next();
+               next();
             }
         });
     }
@@ -24,5 +23,4 @@ exports.checkToken = (req, res, next) => {
         });
     }
 }
-//ftgdryhhtfgggggggggggggggggggggggggggjdfjngjfhdjghjdhjktghjkdtjedhgjhjdrhjkrf
-//fghrfydfyhrfyrffghdfhdg
+ 

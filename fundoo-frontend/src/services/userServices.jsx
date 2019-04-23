@@ -5,9 +5,10 @@ function userLogin(data){
          axios.post('/login',data)
          .then(function (response) {
             localStorage.setItem("token",response.data.token)
+            localStorage.setItem("email",response.data.email)
              console.log(response)
             toast("Login Successful")
-            window.location.href='/dashboard'
+             window.location.href='/dashboard'
         })
         .catch(function (err) {
             console.log(err)
@@ -39,6 +40,7 @@ function userForgot(data){
     })
 }
 function userReset(data,token){
+    console.log("token in services fe==",token)
 
 axios.post(`/reset/${token}`,data,{
     headers:{
@@ -48,7 +50,7 @@ axios.post(`/reset/${token}`,data,{
 .then(function(response){
     console.log(response)
     toast('Your password is reseted')
-    window.location.href='/login'
+     window.location.href='/login'
 })
 .catch(function(err){
     console.log(err)
@@ -56,7 +58,7 @@ axios.post(`/reset/${token}`,data,{
 })
 }
 function verifyService(data,token){
-    console.log("tokfgf",token);
+
     
     axios.post(`/verifyemail/${token}`,data,{
         headers:{
@@ -67,22 +69,22 @@ function verifyService(data,token){
     .then(function(response){
         console.log(response)
        alert('Email verified')
+       window.location.href="/login"
 
     })
     .catch(function(err){
         console.log(err)
         toast('email not verified')
     })
+  
+}
+function noteService(data){
+    return axios.post('/note',data)
 }
 
-export { userLogin,userRegister,userForgot,userReset,verifyService}
+export { userLogin,userRegister,userForgot,userReset,verifyService,noteService}
 export default withRouter(userLogin,userRegister,userForgot,userReset);
 
 
 
-/**
- * sfhnoesaf
- * efsekfjse
- * fsefhsef
- * esfsefesfes[fhse
- * fsefesf] */
+ 

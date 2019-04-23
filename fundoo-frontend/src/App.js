@@ -5,7 +5,7 @@ import login from "./pages/login"
 import register from "./pages/register"
 import ForgotPassword from "./pages/ForgotPassword"
 import ResetPassword from "./pages/RestPassword"
-import DashBoard from './components/DashBoard';
+import DashBoard from './pages/DashBoard'
 import VerifyEmail from './pages/VerifyEmail'
 
 class App extends Component {
