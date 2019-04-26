@@ -19,8 +19,9 @@ class AddFile extends Component{
             <div>
             <Tooltip title='Add File'>
             <img src={require('../assets/images/addfile.svg')}
-            alt="upload a photo"
-            onClick={()=>{this.handleOpenFile()}}>
+            alt="upload a file"
+            onClick={()=>{this.handleOpenFile()}}
+            >
             </img>
             
             </Tooltip>

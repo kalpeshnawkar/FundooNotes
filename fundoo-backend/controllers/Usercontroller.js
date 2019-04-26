@@ -42,11 +42,11 @@ exports.register = (req,res) => {
                  user_id:res_result.data._id
             }
            var msg="Please, verify your email"
-            var obj=tokenGenrate(payLoad)
-            var url=`http://localhost:3000/verifyemail/${obj.token}`
+            var token=tokenGenrate(payLoad)
+            var url=`http://localhost:3000/verifyemail/${token}`
             sendMailer(url,req.body.email,msg);
            
-            res_result.token=obj.token;
+            res_result.token=token;
             res.status(200).send(res_result);
         }
     })
@@ -91,11 +91,11 @@ exports.login=(request,response)=>{
             console.log(payload);
             
            var token= tokenGenrate(payload)
-           var userid=res_result.data._id;
-           console.log("user ",userid);
+           var userId=res_result.data._id;
+           console.log("userId" ,userId);
            
-           client.set('token',token)
-           client.get("token",function(err,result){
+           client.set(userId,token)
+           client.get(userId,function(err,result){
                if(err) {
                    console.log(err)
                }
@@ -148,11 +148,11 @@ exports.forgot=(request,response)=>{
                user_id:res_result.data._id
             }
             var msg="Reset Your Password"
-            var obj=tokenGenrate(payload);
-            var url=`http://localhost:3000/resetpassword/${obj.token}`;
+            var token=tokenGenrate(payload);
+            var url=`http://localhost:3000/resetpassword/${token}`;
            sendMailer(url,request.body.email,msg)
           
-            res_result.token=obj.token
+            res_result.token=token
             res_result.url=url
             response.status(200).send(res_result)
 

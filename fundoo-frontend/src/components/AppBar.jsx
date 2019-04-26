@@ -2,7 +2,7 @@
 import React,{Component}from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import{ AppBar} from '@material-ui/core/';
+import{ AppBar,Card} from '@material-ui/core/';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -13,6 +13,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase'
  import DrawerMenu from './DrawerMenu'
  import AccountProfile from './accountProfile'
+ import GridView from './GridView'
 //import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const drawerWidth = 240;
@@ -55,6 +56,7 @@ class Appbar extends Component {
     open:false
     
   };
+  this.handleGridView = this.handleGridView.bind(this);
 }
 
   
@@ -62,6 +64,9 @@ class Appbar extends Component {
     this.setState({
         open:!this.state.open
     })
+  }
+  handleGridView(){
+    this.props.dashboardToApp()
   }
 
  render()  {
@@ -77,21 +82,26 @@ class Appbar extends Component {
          
           
           </IconButton>
-            <div >
-              
+            <div className="appSearchDiv" >
+              <Card className="appSearchCard">
               <IconButton>
+                <div className="appSearchIcon">
                 <SearchIcon />
+                </div>
                 </IconButton>
               
-          
-              <InputBase
+              
+              <InputBase className="appSearch"
                 placeholder="Search…"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
               />
+              
+              </Card>
             </div>
+            <GridView GridViewToApp={this.handleGridView}/>
                 <div className="accountProfile"
                 >
           <IconButton className

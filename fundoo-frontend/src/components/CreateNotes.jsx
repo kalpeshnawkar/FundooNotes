@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { Input } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import Tools from './Tools';
-import {noteService} from '../services/userServices'
+import { createNoteService } from '../services/noteServices'
 
 class CreateNotes extends Component {
     constructor(props) {
         super(props)
         this.state = {
             title: '',
-            description:'',
+            description: '',
             openNote: false,
-            newNote:{}
+            newNote: {}
         }
     }
     handleDescriptionChange = (event) => {
@@ -29,29 +29,39 @@ class CreateNotes extends Component {
         this.setState({
             openNote: !this.state.openNote
         })
-        if(this.state.title!==''|| this.state.description!==''){
-            const data={
-                title:this.state.title,
-                description:this.state.description
+        if (this.state.title !== '' || this.state.description !== '') {
+            const data = {
+                title: this.state.title,
+                description: this.state.description
+
             }
             console.log(data)
-            noteService(data)
-            .then(function(response){
-            this.setState({newNote:response
+            let token = {
+                'token': localStorage.getItem('token')
+            }
+            createNoteService(data, token)
+            .then((response)=>{
+                console.log("response in create note==",response)
+               this.setState({
+                   newNote:response.data.data
+                })
+               console.log("newNote in createNote",this.state.newNote)
+               this.props.getNewNote(this.state.newNote)
+                })
+         
+                
+                .catch(function(err){
+                    console.log(err)
+                    alert(err)
+                })
+            
 
-            })
-            this.props.getNewNote(this.state.newNote)
-
-            })
-            .catch(function(err){
-                console.log(err)
-            })
         }
         this.setState({
             title: "",
-        description: ""
+            description: ""
         })
-    
+
     }
 
     render() {
@@ -71,27 +81,27 @@ class CreateNotes extends Component {
                 <Card>
                     <div>
 
-                    <Input
-                        multiline
-                        disableUnderline={true}
-                        placeholder="title"
-                        value={this.state.title}
-                        onChange={this.handleTitleChange}
+                        <Input
+                            multiline
+                            disableUnderline={true}
+                            placeholder="title"
+                            value={this.state.title}
+                            onChange={this.handleTitleChange}
                         />
-                        </div>
-                        <br></br>
-                        
-                    <Input 
+                    </div>
+                    <br></br>
+
+                    <Input
                         multiline
                         disableUnderline={true}
                         placeholder="take a note.."
                         value={this.state.description}
                         onChange={this.handleDescriptionChange}
-                      />
-                      <div className="noteTools" >
-                          <Tools />
+                    />
+                    <div className="noteTools" >
+                        <Tools />
                         <label className="noteClose" onClick={this.handleToggle}>Close</label>
-                        
+
                     </div>
                 </Card>
             </div>

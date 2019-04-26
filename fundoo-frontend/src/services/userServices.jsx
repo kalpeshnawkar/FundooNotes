@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom'
 function userLogin(data){
          axios.post('/login',data)
          .then(function (response) {
+             console.log("response in login==",response)
             localStorage.setItem("token",response.data.token)
             localStorage.setItem("email",response.data.email)
              console.log(response)
@@ -40,7 +41,7 @@ function userForgot(data){
     })
 }
 function userReset(data,token){
-    console.log("token in services fe==",token)
+    console.log("token in services ==",token)
 
 axios.post(`/reset/${token}`,data,{
     headers:{
@@ -78,11 +79,11 @@ function verifyService(data,token){
     })
   
 }
-function noteService(data){
-    return axios.post('/note',data)
-}
 
-export { userLogin,userRegister,userForgot,userReset,verifyService,noteService}
+
+
+
+export { userLogin,userRegister,userForgot,userReset,verifyService}
 export default withRouter(userLogin,userRegister,userForgot,userReset);
 
 

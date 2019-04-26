@@ -11,6 +11,7 @@ router.post('/forgotpassword',userController.forgot);
 router.post('/reset/:token',verifyToken.checkToken,userController.reset)
 router.post('/verifyemail/:token',verifyToken.checkToken,userController.Emailverify)
 router.post('/setprofile',upload.single('image'),verifyToken.checkToken,userController.setProfile)
-router.post('/note',note.noteController)
+router.post('/createNote',verifyToken.checkToken,note.noteController)
+router.get('/getAllNote',verifyToken.checkToken,note.getAllNote)
 
 module.exports=router;

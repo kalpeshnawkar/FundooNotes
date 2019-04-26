@@ -50,6 +50,7 @@ class ResetPasswordInput extends Component {
             let data = {
                 'password': this.state.password
             }
+           
             event.preventDefault();
             var url=window.location.pathname;
             var verifyurl=url.substr(15)

@@ -52,7 +52,7 @@ class ColorChange extends Component {
             }
           
                 <Tooltip title='Change color'>
-                    <img onClick={this.handleToggle} src={require('../assets/images/Color.svg')}></img>
+                    <img onClick={this.handleToggle} src={require('../assets/images/Color.svg')} alt="change color"></img>
                 </Tooltip>
 
                

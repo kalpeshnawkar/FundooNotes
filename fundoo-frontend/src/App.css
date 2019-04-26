@@ -160,8 +160,8 @@ margin-top: 11%;
   color: gray!important;
 } */
 
-.MuiDrawer-paper-93 {
-  top: 105px!important;
+.MuiDrawer-paper-108 {
+  top:75px!important;
 }
 .PersistentDrawerLeft-drawer-59 {
   width: 0px!important;
@@ -183,6 +183,24 @@ margin-top: 11%;
   color: inherit!important;
 }
 
+.appSearchDiv{
+    display: flex;
+    margin-left: 12%;
+    width: 60%;
+}
+.appSearchCard{
+  width: 100%;
+}
+.appSearchIcon{
+  margin-left: -950px;
+}
+.appSearch{
+  margin-left: -60%;
+}
+.grid{
+  margin-left: 8%;
+}
+
 .labelsDrawer{
   color: #5f6368;
 cursor: default;
@@ -199,7 +217,7 @@ margin-left: -69%;
  background-color:white!important;
 }
 .accountProfile{
-  margin-left: 69%;
+  margin-left: 7%;
 }
 .accountPaper{
    margin-left:  -40%; 
@@ -220,8 +238,8 @@ margin-top: -56px;
   /* border: solid 2px;  */
   text-align: initial;
   width: 44%;
-    height: 40%;
-    margin-left: 38%;
+  height: 40%;
+  margin-left: 33%;;
 }
 .MuiPaper-elevation1-19 {
   box-shadow: 0px 1px 6px 3px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)!important;
@@ -244,7 +262,8 @@ height: 36px;
 padding: 8px 24px;
 -webkit-border-radius: 4px;
 border-radius: 4px;
-margin-left:   434px;
+margin-left: 406px;
+
 }
 .noteTools{
   display: flex;
@@ -257,13 +276,36 @@ margin-left:   434px;
 .colorCard{
   width: 194%;
   margin-left: 14%;
-  margin-top: -126%;
+  margin-top: -140%;
 }
 
 .tools{
 display: flex;
 justify-content: space-between;
 }
+.notesDiv1{
+  display: flex;
+  margin-top: 15%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%
+}
+.notesCard{
+  margin-bottom: 15%;
+  width: 100%;
+  justify-content: space-between;
+}
+  
+
+
+.notesDiv2{
+
+  width: 30%;
+}
+.notesDiv3{
+  margin-top: 15%;
+}
+
 
  
 

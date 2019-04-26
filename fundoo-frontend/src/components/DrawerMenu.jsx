@@ -15,50 +15,55 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Typography from '@material-ui/core/Typography';
+import { createMuiTheme } from '@material-ui/core'
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
- 
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-  
-});
+const theme = createMuiTheme({
+  overrides:
+  {
+    MuiDrawerpaper107: 
+      { paper: { 
+        top: 106, width: 270,
+       },
+      paperAnchorDockedLeft:
+        { borderRight: "white" }
+    }
+  }
+})
+const styles = theme =>
+  ({
+    menuItem:
+    {
+      borderRadius: "0 25px 25px 0",
+      '&:focus':
+      {
+        backgroundColor: "#fff9c4",
+        borderRadius: "0 25px 25px 0",
+        '& $primary, & $icon':
+        {
+          color: theme.palette.common.white,
+        },
+      },
+    }, drawerHeader: {
+      display: 'flex', alignItems: 'center',
+
+    }
+  }
+  );
 
 class PersistentDrawerLeft extends React.Component {
-  constructor(){
+  constructor() {
     super();
-  this.state = {
-    open: false,
-    typoGraphy:'KEEP'
-  };
-}
+    this.state = {
+      open: false,
+      // typoGraphy: 'KEEP'
+    };
+  }
 
-  handleRemainders = () => {
-    this.setState({ typoGraphy: 'Remainders' });
-  };
+  // handleRemainders = () => {
+  //   this.setState({ typoGraphy: 'Remainders' });
+  // };
 
 
   render() {
@@ -76,8 +81,8 @@ class PersistentDrawerLeft extends React.Component {
             paper: classes.drawerPaper,
           }}
         >
-        
-          
+
+
           <List>
             {['Notes'].map((text, index) => (
               <ListItem button key={text}>
@@ -87,7 +92,7 @@ class PersistentDrawerLeft extends React.Component {
             ))}
           </List>
 
-          <List onClick={this.handleRemainders}>
+          <List>
             {['Reminders'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -100,7 +105,7 @@ class PersistentDrawerLeft extends React.Component {
           <List>
             {['Edit Label'].map((text, index) => (
               <ListItem button key={text}>
-            
+
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -108,7 +113,7 @@ class PersistentDrawerLeft extends React.Component {
           </List>
           <Divider />
           <List>
-            {['Archive','Trash'].map((text, index) => (
+            {['Archive', 'Trash'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
@@ -117,9 +122,9 @@ class PersistentDrawerLeft extends React.Component {
           </List>
         </Drawer>
         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-             {this.state.typoGraphy}
-            </Typography>
-    
+          {this.state.typoGraphy}
+        </Typography>
+
       </div>
     );
   }
@@ -130,4 +135,4 @@ PersistentDrawerLeft.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawerLeft);
+export default withStyles(theme, { withTheme: true })(PersistentDrawerLeft);

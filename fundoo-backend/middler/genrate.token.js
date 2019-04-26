@@ -10,7 +10,7 @@ module.exports = {
         }
         console.log(obj);
         
-        return obj;
+        return obj.token;
     }
 
 catch(e){

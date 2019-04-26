@@ -1,6 +1,7 @@
 var jwt = require('jsonwebtoken');
 exports.checkToken = (req, res, next) => {
     var token1 = req.headers['token'];
+    console.log("token1==",token1)
     if (token1) {
         jwt.verify(token1, 'secreatekey', (err, decoded) => {
             if (err) {

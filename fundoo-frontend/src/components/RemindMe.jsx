@@ -34,14 +34,7 @@ class RemindMe extends React.Component {
     this.setState(state => ({ open: !state.open }));
   };
 
-  // handleClose = event => {
-  //   if (this.anchorEl.contains(event.target)) {
-  //     return;
-  //   }
-
-  //   this.setState({ open: false });
-  // };
-
+   
   render() {
     const { classes } = this.props;
     const { open } = this.state;
@@ -60,7 +53,11 @@ class RemindMe extends React.Component {
             this.anchorEl = node;
           }}  
           
-          onClick={this.handleToggle} src={require("../assets/images/reminder.svg")}></img>
+          onClick={this.handleToggle}
+           src={require("../assets/images/reminder.svg")}
+           alt="reminder"
+           >
+           </img>
           </Tooltip>
 
 
