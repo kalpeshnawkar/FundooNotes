@@ -25,4 +25,19 @@ exports.getAllNote=(data,callback)=>{
         }
     })
 }
+exports.editNote=(data,callback)=>{
+    note.editNote(data,(err,result)=>{
+        console.log("editData in  services=",data)
+        
+        
+        if(err){
+            callback(err);
+        }
+        else
+        {
+            return callback(null,result);
+
+        }
+    })
+}
     

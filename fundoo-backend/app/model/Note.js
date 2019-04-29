@@ -11,6 +11,9 @@ const createNoteSchema = new mongoose.Schema({
     'description': {
         type: String,
         require: true
+    },
+    'remindMe':{
+        type:String
     }
 })
 const note = mongoose.model('note', createNoteSchema)
@@ -22,6 +25,7 @@ note_model.prototype.createNote = (request, callback) => {
     var note_data=new note({
         'title':request.title,
         'description':request.description,
+        'remindMe':request.remindMe,
         'userID':request.userID
     })
     note_data.save((err,result) => {
@@ -47,6 +51,29 @@ note_model.prototype.getAllNote = (req,callback) => {
         callback(null,result)
     }
 })
+}
+
+note_model.prototype.editNote=(req, callback)=> {   
+    console.log("editData in note model=",req)
+   note.findOneAndUpdate(
+        {
+            _id: req.userID
+        },
+        {
+            $set:{
+                title :req.title,
+                description:req.description,
+                remindMe:req.remindMe
+            }
+        },
+        (err,result)=>{
+            if(err){
+                callback(err)
+            }else{
+                console.log("updated note data ...",result)
+                return callback(null,result)
+            }
+});
 }
 
 module.exports = new note_model

@@ -8,14 +8,19 @@ class Tools extends Component {
      super()
 
     }
+ 
     render() {
-       
+     
+        var  setAMPM=parseInt(new Date().getHours())>=8 ?"PM":"AM"
+        console.log("setAMPM in tools",setAMPM)
         
         return (
 
         
-                <div className="tools" >
-                    <RemindMe />
+            <div className="tools"> 
+                    <RemindMe
+                    reminder={this.props.reminder} 
+                    setAMPM={setAMPM}/>
                     <ColorChange />
                     <AddFile />
                     

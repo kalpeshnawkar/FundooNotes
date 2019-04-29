@@ -26,38 +26,77 @@ const styles = theme => ({
 });
 
 class RemindMe extends React.Component {
-  state = {
+  constructor(props){
+    super(props)
+  this.state = {
     open: false,
   };
+  this.handleLaterTodayReminder=this.handleLaterTodayReminder.bind(this)
+  this.handleTomorrowReminder=this.handleTomorrowReminder.bind(this)
+  this.handleWeeklyReminder=this.handleWeeklyReminder.bind(this)
+}
 
   handleToggle = () => {
     this.setState(state => ({ open: !state.open }));
   };
-
+  handleLaterTodayReminder=()=>{
+    var setAMPM=parseInt(new Date().getHours())>=8 ?"PM":"AM"
+    var date=new Date().toDateString();
+    var reminder=date+" 8:00 "+setAMPM;
+    console.log("reminder=",reminder)
+    this.props.reminder(reminder)
+  };
+  handleTomorrowReminder=()=>{
+    try{
+    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Mon"]
+    var date = new Date().toDateString();
+    date=date.replace(new Date().getDate().toString(),new Date().getDate()+1);
+    date=date.replace(days[new Date().getDay()-1],days[new Date().getDay()]);
+    var reminder= date+ ", 8 AM" ;
+    console.log("tommorow reminder==",reminder);
+    this.props.reminder(reminder)
+    }
+    catch(err){
+        console.log("error in set reminder for tommorrow");
+    }
+}
+handleWeeklyReminder=()=>{
+    try{
    
+    var date = new Date().toDateString();
+    date=date.replace((new Date().getDate()),(new Date().getDate()+7));
+    var reminder = date+ ", 8 AM" ;
+    console.log("weekly reminder==",reminder);
+    this.props.reminder(reminder)
+    }
+    catch(err){
+        console.log("error in set reminder for next week");
+    }
+}
+
+
   render() {
     const { classes } = this.props;
     const { open } = this.state;
+    const setAMPM=this.props.setAMPM;
+    console.log("setAMPM in reminder==",setAMPM)
 
 
     return (
       <div className={classes.root}>
         <div>
-
-
-        <Tooltip
-        title="Add"
-      >
-          <img buttonRef={node =>
-           {
-            this.anchorEl = node;
-          }}  
-          
-          onClick={this.handleToggle}
-           src={require("../assets/images/reminder.svg")}
-           alt="reminder"
+           <Tooltip
+            title="Add"
            >
-           </img>
+            <img buttonRef={node => {
+              this.anchorEl = node;
+            }}
+
+              onClick={this.handleToggle}
+              src={require("../assets/images/reminder.svg")}
+              alt="reminder"
+            >
+            </img>
           </Tooltip>
 
 
@@ -75,18 +114,18 @@ class RemindMe extends React.Component {
                     <MenuList>
 
                       <MenuItem className="accoutMenuItem">Reminder</MenuItem>
-                      <MenuItem className="accoutMenuItem">
+                      <MenuItem  onClick={this.handleLaterTodayReminder} className="accoutMenuItem">
                         <div>Later Today</div>
-                        <div>8:00 PM</div>
+                        <div>8:00 {setAMPM}</div>
                       </MenuItem>
-                      <MenuItem className="accoutMenuItem" >
+                      <MenuItem onClick={this.handleTomorrowReminder} className="accoutMenuItem" >
                         <div>Tommarow</div>
-                        <div>8:00 PM</div>
+                        <div>8:00 </div>
                       </MenuItem>
-                      <MenuItem className="accoutMenuItem" >
+                      <MenuItem onClick={this.handleWeeklyReminder} className="accoutMenuItem" >
                         <div>Next Week</div>
 
-                        <div>Mon, 8:00 PM</div>
+                        <div>Mon, 8:00 </div>
                       </MenuItem>
                     </MenuList>
                   </ClickAwayListener>

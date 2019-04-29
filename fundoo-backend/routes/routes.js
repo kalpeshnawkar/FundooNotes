@@ -13,5 +13,5 @@ router.post('/verifyemail/:token',verifyToken.checkToken,userController.Emailver
 router.post('/setprofile',upload.single('image'),verifyToken.checkToken,userController.setProfile)
 router.post('/createNote',verifyToken.checkToken,note.noteController)
 router.get('/getAllNote',verifyToken.checkToken,note.getAllNote)
-
+router.post('/editNote',note.editNote)
 module.exports=router;

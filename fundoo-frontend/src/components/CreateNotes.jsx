@@ -10,9 +10,11 @@ class CreateNotes extends Component {
         this.state = {
             title: '',
             description: '',
+            remindMe:'',
             openNote: false,
             newNote: {}
         }
+        this.handleRemindMe=this.handleRemindMe.bind(this)
     }
     handleDescriptionChange = (event) => {
         const description = event.target.value
@@ -23,6 +25,9 @@ class CreateNotes extends Component {
         const title = event.target.value
         this.setState({ title: title })
     }
+    handleRemindMe = (value) => {
+        this.setState({ remindMe: value })
+    }
 
 
     handleToggle = () => {
@@ -32,7 +37,8 @@ class CreateNotes extends Component {
         if (this.state.title !== '' || this.state.description !== '') {
             const data = {
                 title: this.state.title,
-                description: this.state.description
+                description: this.state.description,
+                remindMe:this.state.remindMe
 
             }
             console.log(data)
@@ -98,11 +104,10 @@ class CreateNotes extends Component {
                         value={this.state.description}
                         onChange={this.handleDescriptionChange}
                     />
-                    <div className="noteTools" >
-                        <Tools />
+                    <div className="noteTools" > 
+                        <Tools reminder={this.handleRemindMe} />
                         <label className="noteClose" onClick={this.handleToggle}>Close</label>
-
-                    </div>
+                 </div> 
                 </Card>
             </div>
 

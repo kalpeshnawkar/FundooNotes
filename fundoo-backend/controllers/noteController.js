@@ -14,14 +14,15 @@ exports.noteController = (req,res) => {
    }
     else{
          console.log("req body in controller==",req.body)
-        var note_data={
+        var notedata={
             "title":req.body.title,
             "description":req.body.description,
+            "remindMe":req.body.remindMe,
            "userID" :req.decoded.payload.user_id
         }
-        console.log(note_data)
+        console.log(notedata)
          
-    note.noteService(note_data,(err,result)=>{
+    note.noteService(notedata,(err,result)=>{
         if(err){
             res_result.status=false;
             res_result.message=err;
@@ -63,3 +64,33 @@ exports.getAllNote= (req,res) => {
     })
     
 }
+
+exports.editNote= (req,res) => {
+    
+    var res_result = {};
+
+    var editData={
+        "title":req.body.title,
+        "description":req.body.title,
+        "remindMe":req.body.remindMe,
+       "userID" :req.body._id
+    }
+    console.log("editdata in controller=",editData)
+    note.editNote(editData,(err,result) => {
+        
+        if(err){
+            
+            res_result.status = false;
+            res_result.message = err;
+            res.status(400).send(res_result);
+        }
+        else
+        {
+            res_result.status = true;
+            res_result.data = result;
+            res.status(200).send(res_result);
+        }
+    })
+    
+}
+

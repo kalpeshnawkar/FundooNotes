@@ -64,6 +64,7 @@ class Appbar extends Component {
     this.setState({
         open:!this.state.open
     })
+    
   }
   handleGridView(){
     this.props.dashboardToApp()
